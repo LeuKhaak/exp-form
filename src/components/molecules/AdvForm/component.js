@@ -19,7 +19,11 @@ function AdvForm({ startYear, typeStartYear, experience, endLine }) {
             <span>Стаж:</span>
             <input
               type="text"
-              placeholder={experience + " " + (experience ? endLine : "")} // the value can be used in the placeholder or automatically entered in the field (see code below)
+              placeholder={
+                experience +
+                " " +
+                (experience || experience === 0 ? endLine : "")
+              } // the value can be used in the placeholder or automatically entered in the field (see code below)
 
               //value={experience + " " + (experience ? endLine : "")}
               //readOnly

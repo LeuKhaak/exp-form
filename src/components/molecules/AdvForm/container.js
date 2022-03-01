@@ -6,6 +6,7 @@ import {
   actionGetEndLine,
 } from "src/store/actions/actionExperience";
 import AdvForm from "./component";
+import { selectEndLine } from "src/utils/SelectEndLine";
 
 function AdvFormContainer() {
   const dispatch = useDispatch();
@@ -16,19 +17,7 @@ function AdvFormContainer() {
 
   const currentYear = new Date().getFullYear();
 
-  const selectEndLine = (exp) => {
-    const lastNumber = exp % 10;
-    switch (true) {
-      case exp === 1 || (lastNumber === 1 && exp !== 11):
-        return "год";
-      case exp < 5 || (exp > 20 && lastNumber > 1 && lastNumber < 5):
-        return "года";
-      default:
-        return "лет";
-    }
-  };
-
-  const typeStartYear = (event) => {
+  const handleInputChange = (event) => {
     const exp =
       typeof +event.target.value === "number" &&
       event.target.value.length === 4 &&
@@ -44,7 +33,7 @@ function AdvFormContainer() {
   return (
     <AdvForm
       startYear={startYear}
-      typeStartYear={typeStartYear}
+      typeStartYear={handleInputChange}
       experience={experience}
       endLine={endLine}
     />
