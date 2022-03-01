@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+.wrapper .container {
+  width: 90%;
+  max-width: 90rem;
+  margin: 0 auto 0 auto;
+  max-width: 74.5rem;
+  padding: 1.75rem 0;
+  background-color: rgba(48, 255, 30, 0.2);
+  text-align: center;
+}
