@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import {
   actionGetStartYear,
   actionGetExperience,
@@ -8,13 +8,7 @@ import {
 import AdvForm from "./component";
 import { selectEndLine } from "src/utils/SelectEndLine";
 
-function AdvFormContainer() {
-  const dispatch = useDispatch();
-
-  const startYear = useSelector((state) => state.cards.startYear);
-  const experience = useSelector((state) => state.cards.experience);
-  const endLine = useSelector((state) => state.cards.endLine);
-
+function AdvFormContainer(props) {
   const currentYear = new Date().getFullYear();
 
   const handleInputChange = (event) => {
@@ -25,19 +19,36 @@ function AdvFormContainer() {
         ? currentYear - event.target.value
         : "";
     const end = selectEndLine(exp);
-    dispatch(actionGetStartYear(event.target.value));
-    dispatch(actionGetExperience(exp));
-    dispatch(actionGetEndLine(end));
+    props.getStartYear(event.target.value);
+    props.getExperience(exp);
+    props.getEndLine(end);
   };
 
   return (
     <AdvForm
-      startYear={startYear}
+      startYear={props.startYear}
       typeStartYear={handleInputChange}
-      experience={experience}
-      endLine={endLine}
+      experience={props.experience}
+      endLine={props.endLine}
     />
   );
 }
 
-export const container = AdvFormContainer;
+const mapStateToProps = function (state) {
+  return {
+    startYear: state.experience.startYear,
+    experience: state.experience.experience,
+    endLine: state.experience.endLine,
+  };
+};
+
+const mapDispatchToProps = {
+  getStartYear: actionGetStartYear,
+  getExperience: actionGetExperience,
+  getEndLine: actionGetEndLine,
+};
+
+export const container = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdvFormContainer);

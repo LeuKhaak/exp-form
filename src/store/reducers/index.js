@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import cards from "./reducerExperience";
+import experience from "./reducerExperience";
 
 const reducers = combineReducers({
-  cards,
+  experience,
 });
 export default reducers;
